@@ -33,7 +33,7 @@ class Game:
 
         # Passo 2 - Escolher raça
         print("\nEscolha a raça do personagem:")
-        racas = ["Humano", "Elfo", "Anão", "Orc"]
+        racas = ["Humano", "Elfo", "Anão"]
         for i, r in enumerate(racas, start=1):
             print(f"{i} - {r}")
         r_escolha = int(input("Opção: "))
@@ -44,7 +44,7 @@ class Game:
 
         # Passo 3 - Escolher classe
         print("\nEscolha a classe do personagem:")
-        classes = ["Guerreiro", "Mago", "Ladino", "Clérigo"]
+        classes = ["Guerreiro", "Mago", "Ladino"]
         for i, c in enumerate(classes, start=1):
             print(f"{i} - {c}")
         c_escolha = int(input("Opção: "))
@@ -54,4 +54,5 @@ class Game:
             print("Classe inválida.")
 
         # Mostrar ficha final
+
         personagem.show_character()
