@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if atributo %}
+<h2>Escolha o valor para {{ atributo }}</h2>
+
+{% if erro %}
+<p style="color:red">{{ erro }}</p>
+{% endif %}
+
+<p>Valores disponíveis: {{ valores | join(", ") }}</p>
+<p>Atributos já escolhidos: {{ escolhidos if escolhidos else "Nenhum" }}</p>
+
+<form method="post" action="{{ url_for('escolher_atributo') }}">
+    <input type="hidden" name="nome" value="{{ nome }}">
+    <input type="hidden" name="classe" value="{{ classe }}">
+    <input type="hidden" name="raca" value="{{ raca }}">
+    <input type="hidden" name="modo_dados" value="{{ modo_dados }}">
+    <input type="hidden" name="escolhidos" value="{{ escolhidos }}">
+    <input type="hidden" name="valores_gerados" value="{{ valores_gerados }}">
+
+    <label>{{ atributo }}:
+        <select name="valor" required>
+            {% for v in valores %}
+            <option value="{{ v }}">{{ v }}</option>
+            {% endfor %}
+        </select>
+    </label><br><br>
+
+    <button type="submit">Próximo</button>
+</form>
+
+{% else %}
+<script>
+    window.location.href = "{{ url_for('criar_personagem') }}";
+</script>
+{% endif %}
+
+{% endblock %}

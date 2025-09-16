@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Criação de Personagem</h2>
+
+<form method="post">
+    <!-- Nome -->
+    <label>Nome: <input type="text" name="nome" required></label><br><br>
+
+    <!-- Modo de rolagem -->
+    <label>Modo de Rolagem:
+        <select name="modo_dados" required>
+            <option value="3d6">Estilo Clássico</option>
+            <option value="choose_values">Estilo Aventureiro</option>
+            <option value="4d6_drop_lowest">Estilo Heroico</option>
+        </select>
+    </label><br><br>
+
+    <!-- Classe -->
+    <label>Classe:
+        <select name="classe" required>
+            <option value="mage">Mage</option>
+            <option value="rogue">Rogue</option>
+            <option value="warrior">Warrior</option>
+        </select>
+    </label><br><br>
+
+    <!-- Raça -->
+    <label>Raça:
+        <select name="raca" required>
+            <option value="elf">Elf</option>
+            <option value="human">Human</option>
+            <option value="anao">Anão</option>
+        </select>
+    </label><br><br>
+
+    <button type="submit">Gerar Personagem</button>
+</form>
+
+{% if criado and personagem %}
+    <h3>Personagem Criado:</h3>
+    <p><strong>Nome:</strong> {{ personagem.name }}</p>
+    <p><strong>Classe:</strong> {{ personagem.char_class }}</p>
+    <p><strong>Raça:</strong> {{ personagem.race }}</p>
+    <p><strong>Modo de Dados:</strong> {{ personagem.modo_dados }}</p>
+    <table border="1">
+        <tr><th>Atributo</th><th>Valor</th><th>Mod</th></tr>
+        {% for nome, valor in personagem.attributes.items() %}
+        <tr>
+            <td>{{ nome }}</td>
+            <td>{{ valor }}</td>
+            <td>
+                {% if personagem.modificador is defined %}
+                    {{ personagem.modificador(nome) }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
