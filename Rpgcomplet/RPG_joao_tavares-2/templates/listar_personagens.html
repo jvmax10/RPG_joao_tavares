@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Lista de Personagens</h2>
+<table border="1">
+    <tr>
+        <th>Nome</th>
+        <th>Raça</th>
+        <th>Classe</th>
+        <th>Atributos</th>
+    </tr>
+    {% for p in personagens %}
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.race }}</td>
+        <td>{{ p.char_class }}</td>
+        <td>
+            <ul>
+                {% for attr, val in p.attributes.items() %}
+                <li>{{ attr }}: {{ val }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
