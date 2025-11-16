@@ -6,6 +6,17 @@ from races.anao import Anao
 from classes.warrior import Warrior
 from classes.mage import Mage
 from classes.rogue import Rogue
+import json   # <-- ADICIONADO
+
+
+def salvar_personagem(personagem):   # <-- ADICIONADO
+    data = personagem.__dict__
+
+    with open("personagem.json", "w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+
+    print("\nPersonagem salvo em 'personagem.json'!")
+
 
 class Game:
     def main(self):
@@ -54,5 +65,6 @@ class Game:
             print("Classe inválida.")
 
         # Mostrar ficha final
-
         personagem.show_character()
+
+        salvar_personagem(personagem)   # <-- ADICIONADO AQUI
