@@ -1,3 +1,6 @@
+import json
+import os
+
 class Character:
     def __init__(self, name):
         self.name = name
@@ -32,3 +35,23 @@ class Character:
         print("Atributos:")
         for attr, value in self.attributes.items():
             print(f"{attr}: {value}")
+
+    # 🔥 MÉTODO NOVO: SALVAR PERSONAGEM EM JSON
+    def save_to_json(self):
+        dados = {
+            "nome": self.name,
+            "raca": self.race,
+            "classe": self.char_class,
+            "atributos": self.attributes
+        }
+
+        if not os.path.exists("personagens"):
+            os.makedirs("personagens")
+
+        caminho = f"personagens/{self.name}.json"
+
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(dados, f, indent=4, ensure_ascii=False)
+
+        print(f"\n✔️ Personagem salvo em: {caminho}")
+
